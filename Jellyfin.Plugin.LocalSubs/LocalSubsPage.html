@@ -1,0 +1,44 @@
+<div id="LocalSubsConfigurationPage" data-role="page" class="page type-interior pluginConfigurationPage"
+    data-controller="__plugin/LocalSubsPageScript">
+    <div data-role="content">
+        <div class="content-primary">
+            <h3 class="sectionTitle sectionTitle-cards">
+                <strong>Local Subs : Subtitle provider for local subtitle files</strong>
+            </h3>
+            <form id="LocalSubsForm">
+                <div class="inputContainer">
+                    <input id="LocalSubsFormNewTemplate" is="emby-input" type="text" label="New template"
+                        placeholder="e.g. Subs\%n%_%l%.srt" />
+                    <button is="emby-button" id="LocalSubsFormAdd" class="raised button-submit block">
+                        <span>${Add}</span>
+                    </button>
+                    <div class="fieldDescription">
+                        Use directory separator native to Jellyfin's runtime ('\' on Windows, and '/' on Unix-like
+                        systems).
+                        Templates will be matched against the directory of target media (video).<br />
+                        Available placeholders are:<br />
+                        <ul>
+                            <li><code>%f%</code> : Filename with extension</li>
+                            <li><code>%fn%</code> : Filename without extension</li>
+                            <li><code>%fe%</code> : Filename extension</li>
+                            <li><code>%l%</code> : Language</li>
+                            <li><code>%n%</code> : Numbers</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="inputContainer">
+                    <h3 class="checkboxListLabel">Current templates</h3>
+                    <div id="LocalSubsFormTemplates" class="checkboxList checkboxList-verticalwrap"></div>
+                </div>
+                <div>
+                    <button is="emby-button" id="LocalSubsFormDelete" class="raised button-submit block">
+                        <span>${Delete}</span>
+                    </button>
+                    <button is="emby-button" id="LocalSubsFormReset" class="raised button-submit block">
+                        <span>${Default}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
