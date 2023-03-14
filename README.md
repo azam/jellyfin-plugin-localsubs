@@ -12,6 +12,7 @@ Available placeholders are:
 * `%fe%` : Filename extension
 * `%l%` : Language
 * `%n%` : Any arbitrary number
+* `%any%` : Any characters (This exhaustively tries to match files/directories, so use with care)
 
 ## Installation
 

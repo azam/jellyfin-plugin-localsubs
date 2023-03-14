@@ -137,49 +137,54 @@ public class LocalSubsProvider : ISubtitleProvider
             return Task.FromResult(Enumerable.Empty<RemoteSubtitleInfo>());
         }
 
+        List<string> langStrings = new List<string>();
+        langStrings.Add(request.Language); // Three letter language code
+        langStrings.Add(request.TwoLetterISOLanguageName); // Two letter language code
         try
         {
-            string[] langStrings = new string[] { request.Language, request.TwoLetterISOLanguageName, CultureInfo.GetCultureInfo(request.TwoLetterISOLanguageName).EnglishName };
-            string dir = Path.GetDirectoryName(request.MediaPath) ?? string.Empty;
-            string f = Path.GetFileName(request.MediaPath);
-            string fn = Path.GetFileNameWithoutExtension(request.MediaPath);
-            string fe = Path.GetExtension(request.MediaPath);
-            Dictionary<string, string> placeholders = new Dictionary<string, string>();
-            placeholders.Add("%f%", Regex.Escape(f));
-            placeholders.Add("%fn%", Regex.Escape(fn));
-            placeholders.Add("%fe%", Regex.Escape(fe));
-            placeholders.Add("%n%", "[0-9]+");
-            placeholders.Add("%l%", "(?i)(" + string.Join("|", langStrings) + ")");
-            List<RemoteSubtitleInfo> matches = new List<RemoteSubtitleInfo>();
-            foreach (string template in templates)
-            {
-                if (string.IsNullOrEmpty(template))
-                {
-                    continue;
-                }
-
-                foreach (string match in MatchFile(dir, template, placeholders))
-                {
-                    string ext = (Path.GetExtension(match) ?? "srt").ToLowerInvariant().Replace(".", string.Empty, StringComparison.OrdinalIgnoreCase);
-                    string lang = request.Language;
-                    string id = string.Join(LocalSubsConstants.IDSEPARATOR, ext, lang, match);
-                    _logger.LogInformation("RemoteSubtitleInfo MediaPath: {0} Format: {1} Language: {2} Id: {3}", request.MediaPath, ext, lang, id);
-                    matches.Add(new RemoteSubtitleInfo
-                    {
-                        Id = id,
-                        ProviderName = LocalSubsConstants.NAME,
-                        Format = ext,
-                        ThreeLetterISOLanguageName = lang,
-                        DateCreated = new FileInfo(match).CreationTime,
-                    });
-                }
-            }
-
-            return Task.FromResult(matches.AsEnumerable());
+            langStrings.Add(CultureInfo.GetCultureInfo(request.TwoLetterISOLanguageName).EnglishName);
         }
         catch (CultureNotFoundException e)
         {
-            return Task.FromException<IEnumerable<RemoteSubtitleInfo>>(e);
+            _logger.LogError(e, "Culture not found for {0}", request.TwoLetterISOLanguageName);
         }
+
+        string dir = Path.GetDirectoryName(request.MediaPath) ?? string.Empty;
+        string f = Path.GetFileName(request.MediaPath);
+        string fn = Path.GetFileNameWithoutExtension(request.MediaPath);
+        string fe = Path.GetExtension(request.MediaPath);
+        Dictionary<string, string> placeholders = new Dictionary<string, string>();
+        placeholders.Add("%f%", Regex.Escape(f));
+        placeholders.Add("%fn%", Regex.Escape(fn));
+        placeholders.Add("%fe%", Regex.Escape(fe));
+        placeholders.Add("%n%", "[0-9]+");
+        placeholders.Add("%l%", "(?i)(" + string.Join("|", langStrings) + ")");
+        placeholders.Add("%any%", ".+");
+        List<RemoteSubtitleInfo> matches = new List<RemoteSubtitleInfo>();
+        foreach (string template in templates)
+        {
+            if (string.IsNullOrEmpty(template))
+            {
+                continue;
+            }
+
+            foreach (string match in MatchFile(dir, template, placeholders))
+            {
+                string ext = (Path.GetExtension(match) ?? "srt").ToLowerInvariant().Replace(".", string.Empty, StringComparison.OrdinalIgnoreCase);
+                string lang = request.Language;
+                string id = string.Join(LocalSubsConstants.IDSEPARATOR, ext, lang, match);
+                _logger.LogInformation("RemoteSubtitleInfo MediaPath: {0} Format: {1} Language: {2} Id: {3}", request.MediaPath, ext, lang, id);
+                matches.Add(new RemoteSubtitleInfo
+                {
+                    Id = id,
+                    ProviderName = LocalSubsConstants.NAME,
+                    Format = ext,
+                    ThreeLetterISOLanguageName = lang,
+                    DateCreated = new FileInfo(match).CreationTime,
+                });
+            }
+        }
+
+        return Task.FromResult(matches.AsEnumerable());
     }
 }

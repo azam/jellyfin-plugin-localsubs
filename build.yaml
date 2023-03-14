@@ -1,7 +1,7 @@
 ---
 name: "Local Subs"
 guid: "7de4aa03-f418-4e1c-a8ba-08ccecba4ab5"
-version: "0.1.0.0"
+version: "0.1.1.0"
 targetAbi: "10.8.0.0"
 framework: "net6.0"
 overview: "Subtitle provider for local subtitle files."
