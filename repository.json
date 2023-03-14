@@ -8,6 +8,14 @@
     "owner": "Azamshul Azizy <azamshul@gmail.com>",
     "versions": [
       {
+        "changelog": "## What's Changed\r\n* Add %any% placeholder for wildcard matching by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/1\r\n\r\n## New Contributors\r\n* @azam made their first contribution in https://github.com/azam/jellyfin-plugin-localsubs/pull/1\r\n\r\n**Full Changelog**: https://github.com/azam/jellyfin-plugin-localsubs/compare/v0.1.0...v0.1.1",
+        "checksum": "edd53e7c5107c12bcce548a37ac9de6c",
+        "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v0.1.1/local-subs_0.1.1.0.zip",
+        "targetAbi": "10.8.0.0",
+        "timestamp": "2023-03-14T16:18:45Z",
+        "version": "0.1.1.0"
+      },
+      {
         "changelog": "",
         "checksum": "1dd7662f6f646ad8d7018a032dcaad2f",
         "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v0.1.0/local-subs_0.1.0.0.zip",
