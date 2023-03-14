@@ -1,0 +1,20 @@
+[
+  {
+    "category": "Metadata",
+    "description": "Import subtitles from directories and/or subdirectories of the media file, by string template matching.\n",
+    "guid": "7de4aa03-f418-4e1c-a8ba-08ccecba4ab5",
+    "name": "Local Subs",
+    "overview": "Subtitle provider for local subtitle files.",
+    "owner": "Azamshul Azizy <azamshul@gmail.com>",
+    "versions": [
+      {
+        "changelog": "",
+        "checksum": "1dd7662f6f646ad8d7018a032dcaad2f",
+        "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v0.1.0/local-subs_0.1.0.0.zip",
+        "targetAbi": "10.8.0.0",
+        "timestamp": "2023-03-14T13:26:07Z",
+        "version": "0.1.0.0"
+      }
+    ]
+  }
+]
