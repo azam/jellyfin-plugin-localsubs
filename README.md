@@ -14,6 +14,15 @@ Available placeholders are:
 * `%n%` : Any arbitrary number
 * `%any%` : Any characters (This exhaustively tries to match files/directories, so use with care)
 
+## Versions
+
+Install plugin version according to your Jellyfin version.
+
+|Jellyfin version|Plugin version|
+|--:|--:|
+|`10.8.*`|`0.1.*.*`|
+|`10.9.*`|`0.2.*.*`|
+
 ## Installation
 
 ### Add repository
