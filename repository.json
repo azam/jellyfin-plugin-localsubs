@@ -3,10 +3,19 @@
     "category": "Metadata",
     "description": "Import subtitles from directories and/or subdirectories of the media file, by string template matching.\n",
     "guid": "7de4aa03-f418-4e1c-a8ba-08ccecba4ab5",
+    "imageUrl": "https://raw.githubusercontent.com/azam/jellyfin-plugin-localsubs/main/Icon.png",
     "name": "Local Subs",
     "overview": "Subtitle provider for local subtitle files.",
     "owner": "Azamshul Azizy <azamshul@gmail.com>",
     "versions": [
+      {
+        "changelog": "## What's Changed\r\n* Release 0.2.0.0 by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/6\r\n\r\n\r\n**Full Changelog**: https://github.com/azam/jellyfin-plugin-localsubs/compare/v0.1.1...v0.2.0",
+        "checksum": "fd092edf3004cda650dd9f800b4a629a",
+        "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v0.2.0/local-subs_0.2.0.0.zip",
+        "targetAbi": "10.9.0.0",
+        "timestamp": "2024-05-25T15:15:54Z",
+        "version": "0.2.0.0"
+      },
       {
         "changelog": "## What's Changed\r\n* Add %any% placeholder for wildcard matching by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/1\r\n\r\n## New Contributors\r\n* @azam made their first contribution in https://github.com/azam/jellyfin-plugin-localsubs/pull/1\r\n\r\n**Full Changelog**: https://github.com/azam/jellyfin-plugin-localsubs/compare/v0.1.0...v0.1.1",
         "checksum": "edd53e7c5107c12bcce548a37ac9de6c",
