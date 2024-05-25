@@ -24,10 +24,13 @@ public class LocalSubsPlugin : BasePlugin<LocalSubsConfiguration>, IHasWebPages
     }
 
     /// <inheritdoc />
-    public override string Name => LocalSubsConstants.NAME;
+    public override string Name => LocalSubsConstants.DISPLAYNAME;
 
     /// <inheritdoc />
-    public override Guid Id => Guid.Parse(LocalSubsConstants.GUID);
+    public override string Description => LocalSubsConstants.DESCRIPTION;
+
+    /// <inheritdoc />
+    public override Guid Id => Guid.Parse(LocalSubsConstants.PLUGINGUID);
 
     /// <summary>Gets current plugin instance.</summary>
     public static LocalSubsPlugin? Instance { get; private set; }
@@ -38,8 +41,8 @@ public class LocalSubsPlugin : BasePlugin<LocalSubsConfiguration>, IHasWebPages
     /// <inheritdoc />
     public IEnumerable<PluginPageInfo> GetPages()
     {
-        return new[]
-        {
+        return
+        [
             new PluginPageInfo
             {
                 Name = "LocalSubsPage",
@@ -47,9 +50,9 @@ public class LocalSubsPlugin : BasePlugin<LocalSubsConfiguration>, IHasWebPages
             },
             new PluginPageInfo
             {
-                Name = "LocalSubsPageScript",
-                EmbeddedResourcePath = GetType().Namespace + ".LocalSubsPage.js",
+                Name = "LocalSubsScript.js",
+                EmbeddedResourcePath = GetType().Namespace + ".LocalSubsScript.js",
             },
-        };
+        ];
     }
 }

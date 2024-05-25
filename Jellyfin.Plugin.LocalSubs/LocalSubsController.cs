@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Mime;
+using MediaBrowser.Common.Api;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,8 @@ namespace Jellyfin.Plugin.LocalSubs;
 /// <summary>
 /// Single template string model.
 /// </summary>
+[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileNameMustMatchTypeName", Justification = "Only used locally.")]
+[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Only used locally.")]
 public class TemplateModel
 {
     /// <summary>
@@ -22,6 +26,8 @@ public class TemplateModel
 /// <summary>
 /// Multiple template strings model.
 /// </summary>
+[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileNameMustMatchTypeName", Justification = "Only used locally.")]
+[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Only used locally.")]
 public class TemplatesModel
 {
     /// <summary>
@@ -35,7 +41,7 @@ public class TemplatesModel
 /// </summary>
 [ApiController]
 [Produces(MediaTypeNames.Application.Json)]
-[Authorize(Policy = "DefaultAuthorization")]
+[Authorize(Policy = Policies.SubtitleManagement)]
 public class LocalSubsController : ControllerBase
 {
     /// <summary>

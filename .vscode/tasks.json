@@ -1,54 +1,65 @@
 {
-  // Paths and plugin name are configured in settings.json
-  "version": "2.0.0",
-  "tasks": [
-    {
-      // A chain task - build the plugin, then copy it to your
-      // jellyfin server's plugin directory
-      "label": "build-and-copy",
-      "dependsOrder": "sequence",
-      "dependsOn": ["build", "make-plugin-dir", "copy-dll"]
-    },
-    {
-      // Build the plugin
-      "label": "build",
-      "command": "dotnet",
-      "type": "shell",
-      "args": [
-        "publish",
-        "${workspaceFolder}/${config:pluginName}.sln",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "group": "build",
-      "presentation": {
-        "reveal": "silent"
-      },
-      "problemMatcher": "$msCompile"
-    },
-    {
-        // Ensure the plugin directory exists before trying to use it
-        "label": "make-plugin-dir",
-        "type": "shell",
-        "command": "mkdir",
-        "args": [
-           "-Force",
-           "-Path",
-           "${config:jellyfinDataDir}/plugins/${config:pluginName}/"
-        ]
-    },
-    {
-        // Copy the plugin dll to the jellyfin plugin install path
-        // This command copies every .dll from the build directory to the plugin dir
-        // Usually, you probablly only need ${config:pluginName}.dll
-        // But some plugins may bundle extra requirements
-        "label": "copy-dll",
-        "type": "shell",
-        "command": "cp",
-        "args": [
-           "./${config:pluginName}/bin/Release/net8.0/publish/*",
-           "${config:jellyfinDataDir}/plugins/${config:pluginName}/"
-        ]
-    },
-  ]
+    // Paths and plugin name are configured in settings.json
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // A chain task - build the plugin, then copy it to your
+            // jellyfin server's plugin directory
+            "label": "build-and-copy",
+            "dependsOrder": "sequence",
+            "dependsOn": ["build", "make-plugin-dir", "clean-plugin-dir", "clean-config-file", "copy-dll"]
+        },
+        {
+            // Build the plugin
+            // .NET 8.0 changed to build as release by default, while prior versions built as debug
+            "label": "build",
+            "type": "shell",
+            "command": "dotnet",
+            "args": ["publish", "${workspaceFolder}/${config:pluginName}.sln", "--configuration", "Debug", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            // Ensure the plugin directory exists before trying to use it
+            "label": "make-plugin-dir",
+            "type": "shell",
+            "windows": {
+                "command": "mkdir",
+                "args": ["-Force", "-Path", "${config:jellyfinDataDir}/plugins/${config:pluginName}/"]
+            }
+        },
+        {
+            // Delete contents of plugin directory
+            "label": "clean-plugin-dir",
+            "type": "shell",
+            "windows": {
+                "command": "rm",
+                "args": ["-Force", "-Recurse", "-Path", "${config:jellyfinDataDir}/plugins/${config:pluginName}/*"]
+            }
+        },
+        {
+            // Delete config file
+            // Return success even if the file doesn't exist
+            "label": "clean-config-file",
+            "type": "shell",
+            "windows": {
+                "command": "rm",
+                "args": ["-Force", "-ErrorAction", "Ignore", "-Path", "${config:jellyfinDataDir}/plugins/configurations/${config:pluginName}.xml", "||", "echo", "0"],
+
+            }
+        },
+        {
+            // Copy the plugin dll to the jellyfin plugin install path
+            // This command copies every .dll from the build directory to the plugin dir
+            // Usually, you probablly only need ${config:pluginName}.dll
+            // But some plugins may bundle extra requirements
+            "label": "copy-dll",
+            "type": "shell",
+            "command": "cp",
+            "args": ["./${config:pluginName}/bin/Debug/net8.0/*", "${config:jellyfinDataDir}/plugins/${config:pluginName}/"]
+        }
+    ]
 }

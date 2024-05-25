@@ -17,8 +17,7 @@ public class LocalSubsConfiguration : BasePluginConfiguration
     /// </summary>
     public LocalSubsConfiguration()
     {
-        // Templates = new List<string>();
-        _templates = new List<string>();
+        _templates = [];
     }
 
     /// <summary>Gets or sets template strings.</summary>
@@ -61,6 +60,12 @@ public class LocalSubsConfiguration : BasePluginConfiguration
     public void RemoveTemplate(string template)
     {
         _templates.Remove(template);
+    }
+
+    /// <summary>Remove all templates strings.</summary>
+    public void ClearTemplates()
+    {
+        _templates.Clear();
     }
 
     /// <summary>Reset templates to default.</summary>
