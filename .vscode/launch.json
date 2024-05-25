@@ -7,15 +7,9 @@
             "name": "Launch",
             "request": "launch",
             "preLaunchTask": "build-and-copy",
-            "program": "${config:jellyfinDir}/bin/Debug/net6.0/jellyfin.dll",
-            "args": [
-               //"--nowebclient"
-               "--datadir",
-               "${config:jellyfinDataDir}/",
-               "--webdir",
-               "${config:jellyfinWebDir}/dist/"
-            ],
-            "cwd": "${config:jellyfinDir}",
+            "program": "${config:jellyfinDir}/bin/Debug/net8.0/jellyfin.dll",
+            "args": ["--datadir", "${config:jellyfinDataDir}/", "--webdir", "${config:jellyfinWebDir}/dist/"],
+            "cwd": "${config:jellyfinDir}"
         }
     ]
 }

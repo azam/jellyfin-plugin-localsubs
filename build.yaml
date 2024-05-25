@@ -1,13 +1,14 @@
 ---
 name: "Local Subs"
 guid: "7de4aa03-f418-4e1c-a8ba-08ccecba4ab5"
-version: "0.1.1.0"
-targetAbi: "10.8.0.0"
-framework: "net6.0"
+version: "0.2.0.0"
+targetAbi: "10.9.0.0"
+framework: "net8.0"
 overview: "Subtitle provider for local subtitle files."
 description: >
   Import subtitles from directories and/or subdirectories of the media file, by string template matching.
 category: "Metadata"
+imageUrl: "https://raw.githubusercontent.com/azam/jellyfin-plugin-localsubs/main/Icon.png"
 owner: "Azamshul Azizy <azamshul@gmail.com>"
 artifacts:
 - "Jellyfin.Plugin.LocalSubs.dll"

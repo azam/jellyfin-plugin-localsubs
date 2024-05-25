@@ -1,18 +1,32 @@
 # Local Subs
 
-Subtitle provider plugin for local subtitle files on Jellyfin. Jellyfin by default has a fixed path on detecting subtitle files (srt files, etc.).
+![](Icon.png)
+
+Subtitle provider plugin for a path-configurable local subtitle files for Jellyfin.
+
+Jellyfin by default has a fixed path on detecting subtitle files (srt files, etc.).
 
 This plugin enables importing subtitles from a different path (e.g. in a `Subs` directory on the media path) by letting library owners to specify where to find subtitles local to the media (video) path via templates.
 
 Templates supports placeholders like filename and language to add a degree of freedom on matching subtitles. For example, a t template of `Subs\%fn%.%l%.srt` will match to `Subs\My.Home.Video.2023.Spanish.srt` for media `My.Home.Video.2023.mp4`. The `%l%` placeholder will match for 3 variants of language names, the two letter (e.g. `es` for Spanish), three letter (e.g. `spa` for Spanish) and english name (e.g. `Spanish` for Spanish).
 
 Available placeholders are:
-* `%f%` : Filename with extension
-* `%fn%` : Filename without extension
-* `%fe%` : Filename extension
-* `%l%` : Language
-* `%n%` : Any arbitrary number
-* `%any%` : Any characters (This exhaustively tries to match files/directories, so use with care)
+
+-   `%f%` : Filename with extension
+-   `%fn%` : Filename without extension
+-   `%fe%` : Filename extension
+-   `%l%` : Language
+-   `%n%` : Any arbitrary number
+-   `%any%` : Any characters (This exhaustively tries to match files/directories, so use with care)
+
+## Versions
+
+Install plugin version according to your Jellyfin version.
+
+| Jellyfin version | Plugin version |
+| ---------------: | -------------: |
+|         `10.8.*` |      `0.1.*.*` |
+|         `10.9.*` |      `0.2.*.*` |
 
 ## Installation
 
@@ -54,7 +68,7 @@ This plugins depends on a set of string templates to find the desired subtitles.
     2. Click `Delete`.
 5. _Optional_: Set default templates. (This will override the current templates)
     1. Click `Default`.
-4. _Optional:_ Rescan your library to reflect the changes.
+6. _Optional:_ Rescan your library to reflect the changes.
 
 ## Screenshot
 
@@ -64,7 +78,14 @@ This plugins depends on a set of string templates to find the desired subtitles.
 
 DotNet SDK and an editor is the minimum requirement for development.
 
-VS Code launch settings are included to debug the plugin on Jellyfin. Debugging requires a pre-built Jellyfin server and web app. Web app build requires node as well. Simple preparation Powershell script [prepare.ps1](prepare.ps1) is also provided to download and build Jellyfin for debugging purposes.
+VS Code launch settings are included to debug the plugin on Jellyfin. Debugging requires a pre-built Jellyfin server and web app. Web app build requires node as well. Simple preparation Powershell script [`prepare.ps1`](prepare.ps1) is also provided to download and build Jellyfin for debugging purposes.
+
+Debug launch task is provided at [`.vscode/launch.json`](.vscode/launch.json) and you should change environment specific paths at [`.vscode/settings.json`](.vscode/settings.json).
+
+Jellyfin makes it harder to set a custom ffmpeg path, so add the following entry to `jellyfin-data/config/encoding.xml` to point to your ffmpeg binary.
+```xml
+<EncoderAppPath>C:/path/to/your/ffmpeg/bin/ffmpeg.exe</EncoderAppPath>
+```
 
 Other instructions, please refer to development instructions at [jellyfin-plugin-template](https://github.com/jellyfin/jellyfin-plugin-template) for detailed steps.
 

@@ -13,4 +13,8 @@
     "jellyfinDataDir"  : "${workspaceFolder}/.jellyfin-data",
     // The name of the plugin
     "pluginName" : "Jellyfin.Plugin.LocalSubs",
+    // Path to ffmpeg
+    "ffmpegPath" : "C:\\apps\\media\\ffmpeg\\bin\\ffmpeg.exe",
+    // Path to ffprobe
+    "ffprobePath" : "C:\\apps\\media\\ffmpeg\\bin\\ffprobe.exe",
 }
