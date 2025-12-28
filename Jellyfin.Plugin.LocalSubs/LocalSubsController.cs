@@ -67,6 +67,7 @@ public class LocalSubsController : ControllerBase
         else
         {
             LocalSubsPlugin.Instance!.Configuration.AddTemplate(body.Template);
+            LocalSubsPlugin.Instance!.UpdateConfiguration(LocalSubsPlugin.Instance!.Configuration);
             return Ok();
         }
     }
