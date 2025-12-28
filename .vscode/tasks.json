@@ -7,15 +7,52 @@
             // jellyfin server's plugin directory
             "label": "build-and-copy",
             "dependsOrder": "sequence",
-            "dependsOn": ["build", "make-plugin-dir", "clean-plugin-dir", "clean-config-file", "copy-dll"]
+            "dependsOn": [
+                "build-jellyfin",
+                "build-plugin",
+                "make-plugin-dir",
+                "clean-plugin-dir",
+                "clean-config-file",
+                "copy-dll"
+            ]
         },
         {
             // Build the plugin
             // .NET 8.0 changed to build as release by default, while prior versions built as debug
-            "label": "build",
+            "label": "build-jellyfin",
             "type": "shell",
+            "options": {
+                "cwd": "${config:jellyfinServerDir}",
+            },
             "command": "dotnet",
-            "args": ["publish", "${workspaceFolder}/${config:pluginName}.sln", "--configuration", "Debug", "/property:GenerateFullPaths=true", "/consoleloggerparameters:NoSummary"],
+            "args": [
+                "build",
+                // "-p:WarningsAsErrors:NU1903",
+                "Jellyfin.Server.csproj"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            // Build the plugin
+            // .NET 8.0 changed to build as release by default, while prior versions built as debug
+            "label": "build-plugin",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/${config:pluginNamespace}.sln",
+                "--configuration",
+                "Debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "group": "build",
             "presentation": {
                 "reveal": "silent"
@@ -26,18 +63,43 @@
             // Ensure the plugin directory exists before trying to use it
             "label": "make-plugin-dir",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "${config:jellyfinDataDir}/plugins/${config:pluginName}/"
+            ],
             "windows": {
                 "command": "mkdir",
-                "args": ["-Force", "-Path", "${config:jellyfinDataDir}/plugins/${config:pluginName}/"]
+                "args": [
+                    "-Force",
+                    "-Path",
+                    "${config:jellyfinDataDir}/plugins/${config:pluginName}/"
+                ]
             }
         },
         {
             // Delete contents of plugin directory
             "label": "clean-plugin-dir",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "command": "rm",
+            "args": [
+                "-rf",
+                "${config:jellyfinDataDir}/plugins/${config:pluginName}/*"
+            ],
             "windows": {
                 "command": "rm",
-                "args": ["-Force", "-Recurse", "-Path", "${config:jellyfinDataDir}/plugins/${config:pluginName}/*"]
+                "args": [
+                    "-Force",
+                    "-Recurse",
+                    "-Path",
+                    "${config:jellyfinDataDir}/plugins/${config:pluginName}/*"
+                ]
             }
         },
         {
@@ -45,10 +107,26 @@
             // Return success even if the file doesn't exist
             "label": "clean-config-file",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
+            "command": "rm",
+            "args": [
+                "-rf",
+                "${config:jellyfinDataDir}/plugins/configurations/${config:pluginNamespace}.xml"
+            ],
             "windows": {
                 "command": "rm",
-                "args": ["-Force", "-ErrorAction", "Ignore", "-Path", "${config:jellyfinDataDir}/plugins/configurations/${config:pluginName}.xml", "||", "echo", "0"],
-
+                "args": [
+                    "-Force",
+                    "-ErrorAction",
+                    "Ignore",
+                    "-Path",
+                    "${config:jellyfinDataDir}/plugins/configurations/${config:pluginNamespace}.xml",
+                    "||",
+                    "echo",
+                    "0"
+                ],
             }
         },
         {
@@ -58,8 +136,15 @@
             // But some plugins may bundle extra requirements
             "label": "copy-dll",
             "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}",
+            },
             "command": "cp",
-            "args": ["./${config:pluginName}/bin/Debug/net8.0/*", "${config:jellyfinDataDir}/plugins/${config:pluginName}/"]
+            "args": [
+                "-r",
+                "./${config:pluginNamespace}/bin/Debug/${config:targetFramework}/publish/*",
+                "${config:jellyfinDataDir}/plugins/${config:pluginName}/"
+            ]
         }
     ]
 }

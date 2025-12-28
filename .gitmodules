@@ -1,0 +1,9 @@
+[submodule ".jellyfin"]
+	path = .jellyfin
+	url = https://github.com/jellyfin/jellyfin.git
+	branch = release-10.9.z
+
+[submodule ".jellyfin-web"]
+	path = .jellyfin-web
+	url = https://github.com/jellyfin/jellyfin-web.git
+	branch = release-10.9.z

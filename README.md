@@ -27,6 +27,9 @@ Install plugin version according to your Jellyfin version.
 | ---------------: | -------------: |
 |         `10.8.*` |      `0.1.*.*` |
 |         `10.9.*` |      `0.2.*.*` |
+|         `10.9.*` |     `10.9.*.*` |
+|        `10.10.*` |    `10.10.*.*` |
+|        `10.11.*` |    `10.11.*.*` |
 
 ## Installation
 
@@ -100,7 +103,7 @@ This plugins depends on a set of string templates to find the desired subtitles.
 
 ## Development
 
-DotNet SDK and an editor is the minimum requirement for development.
+DotNet SDK and an editor is the minimum requirement for develoPLUGINNAMEpment.
 
 VS Code launch settings are included to debug the plugin on Jellyfin. Debugging requires a pre-built Jellyfin server and web app. Web app build requires node as well. Simple preparation Powershell script [`prepare.ps1`](prepare.ps1) is also provided to download and build Jellyfin for debugging purposes.
 

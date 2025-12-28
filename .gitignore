@@ -3,7 +3,5 @@ obj/
 .vs/
 .idea/
 artifacts
-.jellyfin/
-.jellyfin-web/
 .jellyfin-data/
 .jellyfin-media/
