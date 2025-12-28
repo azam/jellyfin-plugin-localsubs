@@ -20,10 +20,9 @@
             ]
         },
         "ghcr.io/devcontainers/features/dotnet:2": {
-            "version": "8.0",
-            "additionalVersions": "9.0",
-            "dotnetRuntimeVersions": "8.0, 9.0",
-            "aspNetCoreRuntimeVersions": "8.0, 9.0"
+            "version": "9.0",
+            "dotnetRuntimeVersions": "9.0",
+            "aspNetCoreRuntimeVersions": "9.0"
         },
         "ghcr.io/devcontainers/features/node:1": {
             "version": "20"
