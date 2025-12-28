@@ -12,7 +12,9 @@
                 "--datadir",
                 "${config:jellyfinDataDir}/",
                 "--webdir",
-                "${config:jellyfinWebDir}/dist/"
+                "${config:jellyfinWebDir}/dist/",
+                "--ffmpeg",
+                "${config:ffmpegPath}"
             ],
             "cwd": "${config:jellyfinServerDir}"
         }
