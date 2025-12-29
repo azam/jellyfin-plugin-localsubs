@@ -33,6 +33,14 @@
         "version": "10.11.1.0"
       },
       {
+        "changelog": "## What's Changed\r\n* Fix dependencies by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/20\r\n\r\n\r\n**Full Changelog**: https://github.com/azam/jellyfin-plugin-localsubs/compare/v10.10.1...v10.10.2",
+        "checksum": "d77c823ec02dd629a0dc4e00b3da61c6",
+        "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v10.10.2/local-subs_10.10.2.0.zip",
+        "targetAbi": "10.10.0.0",
+        "timestamp": "2025-12-29T01:17:46Z",
+        "version": "10.10.2.0"
+      },
+      {
         "changelog": "## What's Changed\r\n* Version restructure for v10.10 (issue #13) by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/16\r\n* Fix new template not persisting (issue #12) by @azam in https://github.com/azam/jellyfin-plugin-localsubs/pull/14\r\n\r\n\r\n**Full Changelog**: https://github.com/azam/jellyfin-plugin-localsubs/compare/v10.9.1...v10.10.1",
         "checksum": "2e3a9bd9fe574e6dd4476214f55c3ca0",
         "sourceUrl": "https://github.com/azam/jellyfin-plugin-localsubs/releases/download/v10.10.1/local-subs_10.10.1.0.zip",
