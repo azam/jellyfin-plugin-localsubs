@@ -7,7 +7,8 @@ fi
 
 # Initialize git submodules (jellyfin server and jellyfin-web)
 cd "${WORKSPACE_DIR}"
-git submodule update --init --recursive
+git submodule sync
+git submodule update --init --recursive --remote
 
 # Trust the dotnet development HTTPS certificate
 dotnet dev-certs https --trust

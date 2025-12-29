@@ -19,7 +19,7 @@
     // The name of the plugin
     "pluginNamespace" : "Jellyfin.Plugin.LocalSubs",
     // Path to ffmpeg
-    "ffmpegPath" : "/usr/lib/jellyfin-ffmpeg7/bin/ffmpeg",
+    "ffmpegPath" : "/usr/lib/jellyfin-ffmpeg/ffmpeg",
     // Path to ffprobe
-    "ffprobePath" : "/usr/lib/jellyfin-ffmpeg7/bin/ffprobe",
+    "ffprobePath" : "/usr/lib/jellyfin-ffmpeg/ffprobe",
 }

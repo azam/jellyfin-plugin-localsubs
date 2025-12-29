@@ -9,6 +9,8 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "build-jellyfin",
+                "build-jellyfin-web-npm-install",
+                "build-jellyfin-web-npm-build",
                 "build-plugin",
                 "make-plugin-dir",
                 "clean-plugin-dir",
@@ -17,7 +19,42 @@
             ]
         },
         {
-            // Build the plugin
+            // Build Jellyfin Web UI - npm install
+            "label": "build-jellyfin-web-npm-install",
+            "type": "shell",
+            "options": {
+                "cwd": "${config:jellyfinWebDir}",
+            },
+            "command": "npm",
+            "args": [
+                "install"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            // Build Jellyfin Web UI - npm run build:development
+            "label": "build-jellyfin-web-npm-build",
+            "type": "shell",
+            "options": {
+                "cwd": "${config:jellyfinWebDir}",
+            },
+            "command": "npm",
+            "args": [
+                "run",
+                "build:development"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            // Build Jellyfin.Server project
             // .NET 8.0 changed to build as release by default, while prior versions built as debug
             "label": "build-jellyfin",
             "type": "shell",
